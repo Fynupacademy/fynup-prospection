@@ -546,5 +546,13 @@ addEventListener('scroll',u,{passive:true});u();})();
 function mv(e){if(e.target.closest&&e.target.closest('.calc'))return;var t=e.target.closest&&e.target.closest(sel);if(!t)return;var r=t.getBoundingClientRect(),p=e.touches?e.touches[0]:e;t.style.setProperty('--mx',(p.clientX-r.left)+'px');t.style.setProperty('--my',(p.clientY-r.top)+'px');t.classList.add('glow-on');clearTimeout(t._g);t._g=setTimeout(function(){t.classList.remove('glow-on')},700)}
 document.addEventListener('pointermove',mv,{passive:true});document.addEventListener('touchmove',mv,{passive:true});document.addEventListener('touchstart',mv,{passive:true});})();
 </script>
+<script>
+/* filet de securite reveal : revele les sections visibles meme si IntersectionObserver ne repond pas */
+(function(){var els=[].slice.call(document.querySelectorAll(".rv"));
+function chk(){var h=window.innerHeight||document.documentElement.clientHeight;
+els.forEach(function(e){if(e.classList.contains("in"))return;var r=e.getBoundingClientRect();if(r.top<h*0.92&&r.bottom>0)e.classList.add("in");});}
+addEventListener("scroll",chk,{passive:true});addEventListener("resize",chk);
+addEventListener("load",function(){setTimeout(chk,300)});chk();})();
+</script>
 </body>
 </html>
